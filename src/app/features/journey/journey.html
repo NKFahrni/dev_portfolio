@@ -1,22 +1,11 @@
 <div class="max-w-5xl mx-auto space-y-8">
-      <header class="space-y-2">
-        <p class="text-xs uppercase tracking-[0.3em] text-emerald-400">
-          Journey
-        </p>
-        <h1 class="text-2xl md:text-3xl font-semibold">
-          How I got here
-        </h1>
-        <p class="text-sm text-slate-400">
-          A timeline of my path as a developer – from apprenticeship, through military service,
-          to modern Angular & .NET work.
-        </p>
-      </header>
+      <app-section-title eyebrow="Werdegang" title="Mein Weg hierher" description="Eine Zeitleiste meines Werdegangs als Entwickler – von der Lehre, über den Militärdienst, bis zur modernen Arbeit mit Angular & .NET."></app-section-title>
 
-      <!-- Current role highlight -->
+      <!-- Aktuelle Rolle -->
       @if (store.currentEntry()) {
         <section class="border border-emerald-500/40 bg-emerald-500/5 p-5 space-y-2">
           <p class="text-xs font-semibold uppercase tracking-[0.25em] text-emerald-300">
-            Current Focus
+                  Aktueller Fokus
           </p>
           <h2 class="text-lg font-semibold text-emerald-100">
             {{ store.currentEntry()!.title }}
@@ -33,7 +22,7 @@
         </section>
       }
 
-      <!-- Timeline -->
+      <!-- Zeitleiste -->
       <section class="relative">
         <div class="absolute left-3 top-0 bottom-0 w-px bg-slate-800 md:left-1/2 md:-translate-x-1/2"></div>
 

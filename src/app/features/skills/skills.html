@@ -1,1 +1,24 @@
-<p>skills works!</p>
+<div class="max-w-5xl mx-auto space-y-8">
+	<app-section-title eyebrow="Fähigkeiten" title="Meine Skills" description="Ein Überblick über meine technischen Fähigkeiten, gruppiert nach Bereich."></app-section-title>
+
+	<section class="grid gap-6 md:grid-cols-3">
+		@for (group of store.groups(); track group) {
+			<div class="rounded-2xl border border-slate-800 bg-slate-900/60 p-5 shadow-sm">
+				<h3 class="text-sm font-semibold text-slate-100 mb-3">{{ group.title }}</h3>
+				<div class="space-y-3">
+					@for (s of group.skills; track s) {
+						<div class="space-y-1">
+							<div class="flex justify-between text-xs text-slate-300">
+								<span>{{ s.name }}</span>
+								<span>{{ store.levelLabel(s.level) }}</span>
+							</div>
+							<div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+								<div class="h-2 bg-emerald-400 transition-all skills-progress-anim" [style.width.%]="store.levelToPercent(s.level)"></div>
+							</div>
+						</div>
+					}
+				</div>
+			</div>
+		}
+	</section>
+</div>

@@ -1,8 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { createProfileStore } from '../../shared/stores/profile';
+import { SectionTitle } from '../../shared/ui/section-title/section-title';
+
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [SectionTitle],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })

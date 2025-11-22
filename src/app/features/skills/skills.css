@@ -1,0 +1,9 @@
+/* Small helper styles for the Skills page */
+
+.skills-progress-anim {
+	transition: width 700ms cubic-bezier(.2,.9,.2,1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.skills-progress-anim { transition: none; }
+}

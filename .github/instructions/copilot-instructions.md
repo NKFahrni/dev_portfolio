@@ -1,5 +1,7 @@
 # Copilot Instructions for Dev_Portfolio
 
+THE FOLLOWING FILES ARE ALSO PART OF THE INSTRUCTIONS: C:\Git\private\Dev_Portfolio\.github\instructions\general-instructions..md, C:\Git\private\Dev_Portfolio\.github\instructions\llms-instructions.md
+
 This file contains concise, actionable guidance for AI coding agents working on this Angular 21 portfolio app.
 
 Project overview

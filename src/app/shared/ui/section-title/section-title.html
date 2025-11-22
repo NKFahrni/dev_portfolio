@@ -1,1 +1,11 @@
-<p>section-title works!</p>
+<div class="space-y-2 max-w-5xl mx-auto pb-4">
+	@if (eyebrow) {
+		<p class="text-xs uppercase tracking-[0.3em] text-emerald-400">{{ eyebrow }}</p>
+	}
+	@if (title) {
+		<h1 class="text-2xl md:text-3xl font-semibold">{{ title }}</h1>
+	}
+	@if (description) {
+		<p class="text-sm text-slate-400">{{ description }}</p>
+	}
+</div>

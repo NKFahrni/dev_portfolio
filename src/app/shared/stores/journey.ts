@@ -6,7 +6,7 @@ export function createJourneyStore() {
     const entries = signal<JourneyEntry[]>(JOURNEY_ENTRIES);
 
     const sortedEntries = computed(() =>
-        [...entries()].sort((entryA, entryB) => entryA.from.localeCompare(entryB.from))
+        [...entries()].sort((entryA, entryB) => entryB.from.localeCompare(entryA.from))
     );
 
     const currentEntry = computed(() =>

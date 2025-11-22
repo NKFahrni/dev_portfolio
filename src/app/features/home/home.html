@@ -1,0 +1,50 @@
+
+ <div class="max-w-5xl mx-auto space-y-8">
+      <!-- Hero -->
+      <section class="space-y-4">
+        <p class="text-sm uppercase tracking-[0.3em] text-emerald-400">
+          Dev Portfolio
+        </p>
+        <h1 class="text-3xl md:text-4xl font-bold">
+          {{ profileStore.displayName() }}
+        </h1>
+        <p class="text-lg text-slate-300">
+          {{ profileStore.profile().title }}
+        </p>
+        <p class="text-sm text-slate-400">
+          {{ profileStore.profile().tagline }}
+        </p>
+      </section>
+
+      <!-- Focus tiles -->
+      <section class="space-y-3">
+        <h2 class="text-sm font-semibold text-slate-200 tracking-wide">
+          Current Focus
+        </h2>
+        <div class="grid gap-4 sm:grid-cols-3">
+          @for (area of profileStore.focusAreas(); track area) {
+            <div class="rounded-xl border border-slate-800 bg-slate-900/60 p-4 text-sm text-slate-200 shadow-sm shadow-emerald-500/10">
+              {{ area }}
+            </div>
+          }
+        </div>
+      </section>
+
+      <!-- Placeholder sections you’ll flesh out later -->
+      <section class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-xl border border-slate-800 bg-slate-900/40 p-4">
+          <h3 class="text-sm font-semibold mb-2 text-slate-100">This week</h3>
+          <p class="text-xs text-slate-400">
+            Add a list here of what you’re currently learning or shipping.
+          </p>
+        </div>
+        <div class="rounded-xl border border-slate-800 bg-slate-900/40 p-4">
+          <h3 class="text-sm font-semibold mb-2 text-slate-100">
+            Recent wins
+          </h3>
+          <p class="text-xs text-slate-400">
+            Later you can pull this from localStorage or a JSON file.
+          </p>
+        </div>
+      </section>
+    </div>

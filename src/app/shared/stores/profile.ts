@@ -1,5 +1,5 @@
 import { signal, computed } from '@angular/core';
-import { PROFILE } from '../data/profile.data';
+import { PROFILE } from '../data/profile';
 
 export function createProfileStore() {
   const profileSignal = signal(PROFILE);

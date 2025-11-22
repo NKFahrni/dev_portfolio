@@ -1,4 +1,6 @@
-export const PROFILE = {
+import { Profile } from "../models/profile";
+
+export const PROFILE:Profile = {
   name: 'Nathan Fahrni',
   title: 'Angular & .NET Developer',
   tagline: 'Leveling up one commit at a time.',

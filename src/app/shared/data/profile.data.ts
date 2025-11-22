@@ -3,5 +3,5 @@ export const PROFILE = {
   title: 'Angular & .NET Developer',
   tagline: 'Leveling up one commit at a time.',
   location: 'Switzerland',
-  focusAreas: ['Angular 21 zoneless', '.NET 8 isolated worker', 'Clean architecture'],
+  focusAreas: ['Angular 21', 'Clean architecture', 'Azure Functions dotnet isolated'],
 };

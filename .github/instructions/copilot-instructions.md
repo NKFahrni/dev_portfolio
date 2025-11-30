@@ -97,3 +97,7 @@ You are an expert in TypeScript, Angular, and scalable web application developme
 - Design services around a single responsibility
 - Use the `providedIn: 'root'` option for singleton services
 - Use the `inject()` function instead of constructor injection
+
+
+## RULES FOR THIS REPO
+- YOU MUST ALWAYS USE @if AND @for IN TEMPLATES IN THIS REPO. DO NOT USE *ngIf OR *ngFor.

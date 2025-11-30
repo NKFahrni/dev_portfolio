@@ -1,0 +1,29 @@
+<div class="p-6">
+  <h2 class="text-2xl mb-4">Drivers</h2>
+
+  @if (loading()) {
+    <div class="text-sm text-slate-500">Loading drivers…</div>
+  }
+
+  @if (error()) {
+    <div class="text-sm text-red-600">{{ error() }}</div>
+  }
+
+  @if (!loading() && !error()) {
+    <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      @for (driver of drivers(); track driver) {
+        <li class="border rounded p-3 flex items-center gap-3">
+          <a [routerLink]="['/driver', driver.driver_number]" class="flex items-center gap-3 no-underline text-inherit">
+            @if (driver.headshot_url) {
+              <img [src]="driver.headshot_url" alt="{{driver.full_name}}" width="64" height="64" class="rounded-full object-cover" />
+            }
+            <div>
+              <div class="font-semibold">{{ driver.full_name }}</div>
+              <div class="text-sm text-slate-500">#{{ driver.driver_number }} — {{ driver.team_name || driver.broadcast_name }}</div>
+            </div>
+          </a>
+        </li>
+      }
+    </ul>
+  }
+</div>

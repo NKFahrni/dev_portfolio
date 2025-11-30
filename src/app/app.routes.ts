@@ -26,6 +26,16 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./features/projects/projects').then(m => m.Projects),
       },
+      {
+        path: 'openf1',
+        loadComponent: () =>
+          import('./features/openf1/openf1-layout').then(m => m.OpenF1Layout),
+      },
+      {
+        path: 'driver/:driverNumber',
+        loadComponent: () =>
+          import('./features/openf1/driver/driver').then(m => m.DriverComponent),
+      },
     ],
   },
   {

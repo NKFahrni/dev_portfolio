@@ -1,0 +1,42 @@
+<div class="max-w-xl mx-auto p-6 bg-white/90 backdrop-blur rounded-xl shadow-md border border-gray-200">
+  @if (loading()) {
+    <div class="text-center text-gray-800">Loading driver...</div>
+  }
+
+  @if (error()) {
+    <div class="text-center text-red-500">{{ error() }}</div>
+  }
+
+  @if (driver()) {
+    <div class="flex gap-4 items-center">
+      <img [ngSrc]="driver()!.headshot_url" alt="{{driver()!.full_name}}" width="93" height="93" decoding="async" loading="lazy" class="w-[93px] h-[93px] rounded-full ring-4 ring-white shadow-md object-cover" />
+      <div>
+        <div class="text-2xl font-bold text-gray-900">{{ driver()!.full_name }}</div>
+        <div class="text-sm text-gray-700">{{ driver()!.team_name }} · <span class="uppercase text-gray-700">{{ driver()!.country_code }}</span></div>
+        <div class="mt-2 flex gap-2 items-center">
+          <div class="px-3 py-1 rounded-md text-sm font-semibold text-white" [style.background]="'#' + driver()!.team_colour">{{ driver()!.team_name }}</div>
+          <div class="px-3 py-1 rounded-md bg-gray-200 text-sm text-gray-800">#{{ driver()!.driver_number }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-4 grid grid-cols-2 gap-3">
+      <div class="p-3 bg-gray-100 rounded">
+        <div class="text-xs text-gray-600">First name</div>
+        <div class="font-medium text-gray-900">{{ driver()!.first_name }}</div>
+      </div>
+      <div class="p-3 bg-gray-100 rounded">
+        <div class="text-xs text-gray-600">Last name</div>
+        <div class="font-medium text-gray-900">{{ driver()!.last_name }}</div>
+      </div>
+      <div class="p-3 bg-gray-100 rounded">
+        <div class="text-xs text-gray-600">Acronym</div>
+        <div class="font-medium text-gray-900">{{ driver()!.name_acronym }}</div>
+      </div>
+      <div class="p-3 bg-gray-100 rounded">
+        <div class="text-xs text-gray-600">Broadcast</div>
+        <div class="font-medium text-gray-900">{{ driver()!.broadcast_name }}</div>
+      </div>
+    </div>
+  }
+</div>

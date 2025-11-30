@@ -29,7 +29,7 @@ export const routes: Routes = [
       {
         path: 'openf1',
         loadComponent: () =>
-          import('./features/openf1/openf1-data').then(m => m.OpenF1Data),
+          import('./features/openf1/openf1-layout').then(m => m.OpenF1Layout),
       },
     ],
   },

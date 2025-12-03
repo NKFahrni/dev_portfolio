@@ -51,6 +51,15 @@ export function createDriversStore() {
     const existing = recentDrivers().filter(d => d.driver_number !== driver.driver_number);
     const updated = [driver, ...existing].slice(0, 4);
     recentDrivers.set(updated);
+    // Debug logging to help trace why recentDrivers may not update
+    try {
+      console.log('[DriversStore] recordVisitedDriver:', {
+        recorded: driver.driver_number,
+        recent: recentDrivers().map(d => d.driver_number),
+      });
+    } catch (logErr) {
+      // swallow logging errors in environments where console may be limited
+    }
   }
 
   return {
@@ -62,5 +71,6 @@ export function createDriversStore() {
     loadAll,
     loadByNumber,
     recordVisitedDriver,
+    debugRecentDrivers: () => recentDrivers(),
   };
 }

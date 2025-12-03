@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
 import { Drivers } from '../models/driver';
+import { Meetings } from '../models/meeting';
 
 @Injectable({ providedIn: 'root' })
 export class OpenF1Service {
@@ -25,6 +26,16 @@ export class OpenF1Service {
 			return data;
 		} catch (err: any) {
 			throw new Error(`Failed to fetch drivers: ${err?.message || String(err)}`);
+		}
+	}
+
+	async getMeetings(): Promise<Meetings> {
+		const url = `${this.base}/meetings`;
+		try {
+			const data = await firstValueFrom(this.http.get<Meetings>(url));
+			return data || [];
+		} catch (err: any) {
+			throw new Error(`Failed to fetch meetings: ${err?.message || String(err)}`);
 		}
 	}
 

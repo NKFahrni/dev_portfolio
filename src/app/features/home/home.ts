@@ -5,8 +5,7 @@ import { SectionTitle } from '../../shared/ui/section-title/section-title';
 @Component({
   selector: 'app-home',
   imports: [SectionTitle],
-  templateUrl: './home.html',
-  styleUrl: './home.css',
+  templateUrl: './home.html'
 })
 export class Home {
   public profileStore = createProfileStore();

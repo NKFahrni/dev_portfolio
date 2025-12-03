@@ -1,6 +1,6 @@
 import { signal } from '@angular/core';
 import { OpenF1Service } from '../services/openf1.service';
-import { Drivers } from '../models/driver';
+import { Driver, Drivers } from '../models/driver';
 import { inject } from '@angular/core';
 
 export function createDriversStore() {
@@ -10,6 +10,7 @@ export function createDriversStore() {
   const selectedDriver = signal<number | null>(null);
   const loading = signal(false);
   const error = signal<string | null>(null);
+  const recentDrivers = signal<Drivers>([]);
 
   async function loadAll() {
     loading.set(true);
@@ -32,6 +33,7 @@ export function createDriversStore() {
       if (result) {
         drivers.set([result]);
         selectedDriver.set(result.driver_number);
+        recordVisitedDriver(result);
         return result;
       }
       drivers.set([]);
@@ -45,12 +47,20 @@ export function createDriversStore() {
     }
   }
 
+  function recordVisitedDriver(driver: Driver) {
+    const existing = recentDrivers().filter(d => d.driver_number !== driver.driver_number);
+    const updated = [driver, ...existing].slice(0, 4);
+    recentDrivers.set(updated);
+  }
+
   return {
     drivers,
     selectedDriver,
     loading,
     error,
+    recentDrivers,
     loadAll,
     loadByNumber,
+    recordVisitedDriver,
   };
 }

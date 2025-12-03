@@ -32,6 +32,11 @@ export const routes: Routes = [
           import('./features/openf1/openf1-layout').then(m => m.OpenF1Layout),
       },
       {
+        path: 'openf1/meetings',
+        loadComponent: () =>
+          import('./features/openf1/meetings/meetings').then(m => m.MeetingsComponent),
+      },
+      {
         path: 'openf1/drivers',
         loadComponent: () =>
           import('./features/openf1/drivers/drivers').then(m => m.DriversComponent),

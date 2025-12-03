@@ -1,0 +1,22 @@
+<div class="p-6">
+  <h2 class="text-2xl mb-4">Meetings (Races)</h2>
+
+  @if (meetingsStore.loading()) {
+    <div class="text-sm text-slate-500">Loading meetings…</div>
+  }
+
+  @if (meetingsStore.error()) {
+    <div class="text-sm text-red-600">{{ meetingsStore.error() }}</div>
+  }
+
+  @if (!meetingsStore.loading() && !meetingsStore.error()) {
+    <ul class="space-y-3">
+      @for (meeting of meetingsStore.meetings(); track meeting) {
+        <li class="border rounded p-3">
+          <div class="font-semibold">{{ meeting?.meeting_name }} — <span class="text-sm text-slate-500">{{ meeting?.location }} ({{ meeting?.country_code }})</span></div>
+          <div class="text-sm text-slate-500">Starts: {{ meeting?.date_start }} · Year: {{ meeting?.year }}</div>
+        </li>
+      }
+    </ul>
+  }
+</div>

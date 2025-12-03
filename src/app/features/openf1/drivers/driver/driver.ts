@@ -7,9 +7,7 @@ import { NgOptimizedImage } from '@angular/common';
 @Component({
   selector: 'app-driver',
   imports: [NgOptimizedImage],
-  templateUrl: './driver.html',
-  styleUrl: './driver.css',
-  standalone: true,
+  templateUrl: './driver.html'
 })
 export class DriverComponent implements OnInit {
   private route = inject(ActivatedRoute);

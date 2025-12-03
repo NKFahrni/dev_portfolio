@@ -1,5 +1,82 @@
 <div class="p-6">
-  <div class="flex items-center justify-between mb-4">
-    <h2 class="text-2xl">Drivers</h2>
-    <a routerLink="/openf1/drivers" class="bg-sky-600 text-white px-3 py-1 rounded text-sm no-underline">View all drivers</a>
+  <div class="mb-6">
+    <h1 class="text-3xl font-bold">OpenF1 Dashboard</h1>
+    <p class="text-sm text-slate-500">Overview of drivers and upcoming meetings (races)</p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- Drivers Card (recent) -->
+    <section class="rounded-lg shadow p-4 bg-sky-800 text-white">
+      <div class="flex items-start justify-between">
+        <div>
+          <div class="text-sm text-sky-200">Recently Visited Drivers</div>
+          <div class="text-2xl font-semibold">{{ driversStore.recentDrivers().length }}</div>
+        </div>
+        <div class="flex items-center gap-2">
+          <a routerLink="/openf1/drivers" class="bg-sky-600 text-white px-3 py-1 rounded text-sm no-underline">View all</a>
+        </div>
+      </div>
+
+      <div class="mt-4">
+        @if (driversStore.loading()) {
+          <div class="text-sm text-slate-500">Loading drivers…</div>
+        }
+
+        @if (driversStore.error()) {
+          <div class="text-sm text-red-600">{{ driversStore.error() }}</div>
+        }
+
+        @if (!driversStore.loading() && !driversStore.error()) {
+          <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            @for (driver of driversStore.recentDrivers(); track driver) {
+              <li class="p-2 rounded bg-white/10">
+                <a [routerLink]="['/driver', driver.driver_number]" class="flex items-center gap-3 no-underline text-white">
+                  @if (driver.headshot_url) {
+                    <img [src]="driver.headshot_url" alt="{{driver.full_name}}" width="48" height="48" class="rounded-full object-cover" />
+                  }
+                  <div>
+                    <div class="font-medium">{{ driver.full_name }}</div>
+                    <div class="text-xs text-sky-200">#{{ driver.driver_number }} — {{ driver.team_name || driver.broadcast_name }}</div>
+                  </div>
+                </a>
+              </li>
+            }
+          </ul>
+        }
+      </div>
+    </section>
+
+    <!-- Meetings Card (recent) -->
+    <section class="rounded-lg shadow p-4 bg-emerald-800 text-white">
+      <div class="flex items-start justify-between">
+        <div>
+          <div class="text-sm text-emerald-200">Recently Viewed Meetings</div>
+          <div class="text-2xl font-semibold">{{ meetingsStore.recentMeetings().length }}</div>
+        </div>
+        <div class="flex items-center gap-2">
+          <a routerLink="/openf1/meetings" class="bg-slate-600 text-white px-3 py-1 rounded text-sm no-underline">View all</a>
+        </div>
+      </div>
+
+      <div class="mt-4">
+        @if (meetingsStore.loading()) {
+          <div class="text-sm text-slate-500">Loading meetings…</div>
+        }
+
+        @if (meetingsStore.error()) {
+          <div class="text-sm text-red-600">{{ meetingsStore.error() }}</div>
+        }
+
+        @if (!meetingsStore.loading() && !meetingsStore.error()) {
+          <ul class="space-y-2">
+            @for (meeting of meetingsStore.recentMeetings(); track meeting) {
+              <li class="p-2 rounded bg-white/10">
+                <div class="font-medium text-white">{{ meeting?.meeting_name }}</div>
+                <div class="text-xs text-emerald-200">{{ meeting?.date_start }} — {{ meeting?.location }}</div>
+              </li>
+            }
+          </ul>
+        }
+      </div>
+    </section>
   </div>

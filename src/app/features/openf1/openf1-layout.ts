@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { createDriversStore } from '../../shared/stores/drivers';
+import { createMeetingsStore } from '../../shared/stores/meetings';
 import { RouterLink } from '@angular/router';
 import { Drivers } from '../../shared/models/driver';
 
@@ -10,9 +11,11 @@ import { Drivers } from '../../shared/models/driver';
 })
 export class OpenF1Layout implements OnInit {
 	public driversStore = createDriversStore();
+	public meetingsStore = createMeetingsStore();
 
 	ngOnInit(): void {
 		void this.driversStore.loadAll();
+		void this.meetingsStore.loadAll();
 	}
 
 }

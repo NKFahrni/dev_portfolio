@@ -13,10 +13,10 @@ export function createMeetingsStore() {
     loading.set(true);
     error.set(null);
     try {
-      const res = await service.getMeetings();
-      meetings.set(res || []);
-    } catch (err: any) {
-      error.set(err?.message || String(err));
+      const result = await service.getMeetings();
+      meetings.set(result || []);
+    } catch (caughtError: any) {
+      error.set(caughtError?.message || String(caughtError));
     } finally {
       loading.set(false);
     }

@@ -15,8 +15,8 @@ export class OpenF1Service {
 			const data = await firstValueFrom(this.http.get<Drivers>(url));
 			const list = data || [];
 			return list.length ? list[0] : null;
-		} catch (err: any) {
-			throw new Error(`Failed to fetch driver: ${err?.message || String(err)}`);
+		} catch (error: any) {
+			throw new Error(`Failed to fetch driver: ${error?.message || String(error)}`);
 		}
 	}
 
@@ -25,8 +25,8 @@ export class OpenF1Service {
 		try {
 			const data = await firstValueFrom(this.http.get<Drivers>(url));
 			return data;
-		} catch (err: any) {
-			throw new Error(`Failed to fetch drivers: ${err?.message || String(err)}`);
+		} catch (error: any) {
+			throw new Error(`Failed to fetch drivers: ${error?.message || String(error)}`);
 		}
 	}
 
@@ -35,8 +35,8 @@ export class OpenF1Service {
 		try {
 			const data = await firstValueFrom(this.http.get<Meetings>(url));
 			return data || [];
-		} catch (err: any) {
-			throw new Error(`Failed to fetch meetings: ${err?.message || String(err)}`);
+		} catch (error: any) {
+			throw new Error(`Failed to fetch meetings: ${error?.message || String(error)}`);
 		}
 	}
 

@@ -15,10 +15,10 @@ export function createDriversStore() {
     loading.set(true);
     error.set(null);
     try {
-      const res = await service.getDrivers();
-      drivers.set(res || []);
-    } catch (err: any) {
-      error.set(err?.message || String(err));
+      const result = await service.getDrivers();
+      drivers.set(result || []);
+    } catch (caughtError: any) {
+      error.set(caughtError?.message || String(caughtError));
     } finally {
       loading.set(false);
     }
@@ -28,17 +28,17 @@ export function createDriversStore() {
     loading.set(true);
     error.set(null);
     try {
-      const res = await service.driverByNumber(driverNumber);
-      if (res) {
-        drivers.set([res]);
-        selectedDriver.set(res.driver_number);
-        return res;
+      const result = await service.driverByNumber(driverNumber);
+      if (result) {
+        drivers.set([result]);
+        selectedDriver.set(result.driver_number);
+        return result;
       }
       drivers.set([]);
       selectedDriver.set(null);
       return null;
-    } catch (err: any) {
-      error.set(err?.message || String(err));
+    } catch (caughtError: any) {
+      error.set(caughtError?.message || String(caughtError));
       return null;
     } finally {
       loading.set(false);

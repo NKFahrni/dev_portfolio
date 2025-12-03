@@ -8,7 +8,7 @@ import { Meetings } from '../models/meeting';
 export class OpenF1Service {
 	private readonly base = 'https://api.openf1.org/v1';
 	private http = inject(HttpClient);
-	private driversCache = signal<Drivers | null>(null);
+	private driversCache = signal<Drivers>([]);
 
 	async driverByNumber(driverNumber: number): Promise<Driver | null> {
 		// Prefer searching the locally cached drivers list to avoid extra network calls.

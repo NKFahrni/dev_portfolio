@@ -14,5 +14,4 @@ export class DriversComponent implements OnInit {
   ngOnInit(): void {
     void this.driversStore.loadAll();
   }
-
 }

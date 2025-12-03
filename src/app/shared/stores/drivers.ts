@@ -1,16 +1,16 @@
-import { signal } from '@angular/core';
-import { OpenF1Service } from '../services/openf1.service';
+import { signal, inject } from '@angular/core';
 import { Driver, Drivers } from '../models/driver';
-import { inject } from '@angular/core';
+import { OpenF1Service } from '../services/openf1.service';
+import { OpenF1StateService } from '../services/openf1-state.service';
 
 export function createDriversStore() {
+  const state = inject(OpenF1StateService);
   const service = inject(OpenF1Service);
 
   const drivers = signal<Drivers>([]);
   const selectedDriver = signal<number | null>(null);
   const loading = signal(false);
   const error = signal<string | null>(null);
-  const recentDrivers = signal<Drivers>([]);
 
   async function loadAll() {
     loading.set(true);
@@ -29,13 +29,15 @@ export function createDriversStore() {
     loading.set(true);
     error.set(null);
     try {
-      const result = await service.driverByNumber(driverNumber);
-      if (result) {
-        drivers.set([result]);
-        selectedDriver.set(result.driver_number);
-        recordVisitedDriver(result);
-        return result;
+      const list = drivers() || [];
+      const found = list.find(d => d.driver_number === driverNumber) || null;
+      if (found) {
+        drivers.set([found]);
+        selectedDriver.set(found.driver_number);
+        state.recordVisitedDriver(found);
+        return found;
       }
+      // not found in cached drivers
       drivers.set([]);
       selectedDriver.set(null);
       return null;
@@ -48,18 +50,8 @@ export function createDriversStore() {
   }
 
   function recordVisitedDriver(driver: Driver) {
-    const existing = recentDrivers().filter(d => d.driver_number !== driver.driver_number);
-    const updated = [driver, ...existing].slice(0, 4);
-    recentDrivers.set(updated);
-    // Debug logging to help trace why recentDrivers may not update
-    try {
-      console.log('[DriversStore] recordVisitedDriver:', {
-        recorded: driver.driver_number,
-        recent: recentDrivers().map(d => d.driver_number),
-      });
-    } catch (logErr) {
-      // swallow logging errors in environments where console may be limited
-    }
+    // keep API compatible but delegate to the singleton state service
+    state.recordVisitedDriver(driver);
   }
 
   return {
@@ -67,10 +59,10 @@ export function createDriversStore() {
     selectedDriver,
     loading,
     error,
-    recentDrivers,
+    recentDrivers: state.recentDrivers,
     loadAll,
     loadByNumber,
     recordVisitedDriver,
-    debugRecentDrivers: () => recentDrivers(),
+    debugRecentDrivers: () => state.recentDrivers,
   };
 }

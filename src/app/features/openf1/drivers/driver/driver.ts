@@ -1,6 +1,6 @@
 import { Component, signal, OnInit, inject } from '@angular/core';
-import { Driver } from '../../../../shared/models/driver';
 import { createDriversStore } from '../../../../shared/stores/drivers';
+import { Driver } from '../../../../shared/models/driver';
 import { ActivatedRoute } from '@angular/router';
 import { NgOptimizedImage } from '@angular/common';
 
@@ -18,7 +18,7 @@ export class DriverComponent implements OnInit {
     const driverParam = this.route.snapshot.paramMap.get('driverNumber');
     const parsedNumber = driverParam ? Number(driverParam) : NaN;
     const driverNumber = isNaN(parsedNumber) ? 1 : parsedNumber;
-    const driverResult = await this.driversStore.loadByNumber(driverNumber);
-    if (driverResult) this.driver.set(driverResult);
+    const result = await this.driversStore.loadByNumber(driverNumber);
+    if (result) this.driver.set(result);
   }
 }

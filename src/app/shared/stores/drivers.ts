@@ -28,12 +28,18 @@ export function createDriversStore() {
     loading.set(true);
     error.set(null);
     try {
-      const res = await service.getDriversByNumber(driverNumber);
-      drivers.set(res || []);
-      if (res && res.length) selectedDriver.set(res[0].driver_number);
-      else selectedDriver.set(null);
+      const res = await service.driverByNumber(driverNumber);
+      if (res) {
+        drivers.set([res]);
+        selectedDriver.set(res.driver_number);
+        return res;
+      }
+      drivers.set([]);
+      selectedDriver.set(null);
+      return null;
     } catch (err: any) {
       error.set(err?.message || String(err));
+      return null;
     } finally {
       loading.set(false);
     }

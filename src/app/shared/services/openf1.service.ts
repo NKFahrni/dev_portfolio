@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
-import { Drivers } from '../models/driver';
+import { Drivers, Driver } from '../models/driver';
 import { Meetings } from '../models/meeting';
 
 @Injectable({ providedIn: 'root' })
@@ -9,13 +9,14 @@ export class OpenF1Service {
 	private readonly base = 'https://api.openf1.org/v1';
 	private http = inject(HttpClient);
 
-	async getDriversByNumber(driverNumber: number): Promise<Drivers> {
+	async driverByNumber(driverNumber: number): Promise<Driver | null> {
 		const url = `${this.base}/drivers?driver_number=${encodeURIComponent(String(driverNumber))}`;
 		try {
 			const data = await firstValueFrom(this.http.get<Drivers>(url));
-			return data || [];
+			const list = data || [];
+			return list.length ? list[0] : null;
 		} catch (err: any) {
-			throw new Error(`Failed to fetch drivers: ${err?.message || String(err)}`);
+			throw new Error(`Failed to fetch driver: ${err?.message || String(err)}`);
 		}
 	}
 

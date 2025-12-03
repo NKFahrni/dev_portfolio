@@ -1,10 +1,10 @@
 <div class="max-w-xl mx-auto p-6 bg-white/90 backdrop-blur rounded-xl shadow-md border border-gray-200">
-  @if (loading()) {
+  @if (driversStore.loading()) {
     <div class="text-center text-gray-800">Loading driver...</div>
   }
 
-  @if (error()) {
-    <div class="text-center text-red-500">{{ error() }}</div>
+  @if (driversStore.error()) {
+    <div class="text-center text-red-500">{{ driversStore.error() }}</div>
   }
 
   @if (driver()) {

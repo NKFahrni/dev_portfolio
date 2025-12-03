@@ -1,6 +1,6 @@
-import { Component, signal, OnInit, inject } from '@angular/core';
-import { OpenF1Service } from '../../../shared/services/openf1.service';
+import { Component, OnInit } from '@angular/core';
 import { Drivers } from '../../../shared/models/driver';
+import { createDriversStore } from '../../../shared/stores/drivers';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -9,25 +9,10 @@ import { RouterLink } from '@angular/router';
   templateUrl: './drivers.html'
 })
 export class DriversComponent implements OnInit {
-  private service = inject(OpenF1Service);
-  public drivers = signal([] as Drivers);
-  public loading = signal(true);
-  public error = signal<string | null>(null);
+  public driversStore = createDriversStore();
 
   ngOnInit(): void {
-    void this.load();
+    void this.driversStore.loadAll();
   }
 
-  async load() {
-    this.loading.set(true);
-    this.error.set(null);
-    try {
-      const res = await this.service.getDrivers();
-      this.drivers.set(res || []);
-    } catch (err: any) {
-      this.error.set(err?.message || String(err));
-    } finally {
-      this.loading.set(false);
-    }
-  }
 }

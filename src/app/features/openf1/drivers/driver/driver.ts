@@ -1,6 +1,6 @@
 import { Component, signal, OnInit, inject } from '@angular/core';
-import { OpenF1Service } from '../../../shared/services/openf1.service';
-import { Driver } from '../../../shared/models/driver';
+import { OpenF1Service } from '../../../../shared/services/openf1.service';
+import { Driver } from '../../../../shared/models/driver';
 import { ActivatedRoute } from '@angular/router';
 import { NgOptimizedImage } from '@angular/common';
 

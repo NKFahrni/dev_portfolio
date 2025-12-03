@@ -39,7 +39,7 @@ export const routes: Routes = [
       {
         path: 'driver/:driverNumber',
         loadComponent: () =>
-          import('./features/openf1/driver/driver').then(m => m.DriverComponent),
+          import('./features/openf1/drivers/driver/driver').then(m => m.DriverComponent),
       },
     ],
   },

@@ -6,7 +6,6 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './section-title.html',
-  styleUrl: './section-title.css',
 })
 export class SectionTitle {
   @Input() eyebrow?: string;
